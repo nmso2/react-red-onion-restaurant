@@ -1,0 +1,15 @@
+.link-hover:hover{
+    color: crimson;
+    position: relative;
+}
+.link-hover{
+    color: black;
+}
+.link-hover:hover::after {
+    content: "";
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    bottom: 0;
+    border: 1px solid crimson;
+  }
