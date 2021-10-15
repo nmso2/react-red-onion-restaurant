@@ -6,6 +6,7 @@ import Login from './components/Login/Login/Login';
 import SignUp from './components/SignUp/SignUp';
 import NotFound from './components/NotFound/NotFound';
 import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <NotFound></NotFound>
           </Route>
         </Switch>
+        <Footer></Footer>
       </BrowserRouter>
     </div>
   );
