@@ -8,9 +8,10 @@ import headerLogo from '../../resources/logo2.png'
 
 const Header = () => {
 
-    const { user, logOut } = useAuth();
+    const { user, logOut, loggedIn} = useAuth();
 
     const cartIcon = <FontAwesomeIcon icon={faShoppingCart} />
+
     return (
         <div>
             <Navbar collapseOnSelect expand="lg" variant="light" sticky="top" bg="white" style={{ position: "sticky", top: 0 }}>
@@ -22,11 +23,11 @@ const Header = () => {
                             <Nav.Link className="p-0 px-5" href="#cart"><Link className="text-decoration-none nav-link" to="/cart">{cartIcon}</Link></Nav.Link>
 
                             {
-                                !user.email ? <Nav.Link className="p-0" href="#login"><Link className="text-decoration-none nav-link" to="/login">Login</Link></Nav.Link> : user.displayName
+                                !loggedIn ? <Nav.Link className="p-0" href="#login"><Link className="text-decoration-none nav-link" to="/login">Login</Link></Nav.Link> : user.displayName
 
                             }
                             {
-                                !user.email ? <Nav.Link eventKey={2} className="p-0" href="#signup"><Link className="text-decoration-none nav-link" to="/signup"><Button className="rounded-pill" style={{ background: "crimson", border: "none", padding: "7px 25px" }}>Sign Up</Button></Link></Nav.Link> :
+                                !loggedIn ? <Nav.Link eventKey={2} className="p-0" href="#signup"><Link className="text-decoration-none nav-link" to="/signup"><Button className="rounded-pill" style={{ background: "crimson", border: "none", padding: "7px 25px" }}>Sign Up</Button></Link></Nav.Link> :
                                     <Nav.Link eventKey={2} className="p-0 px-2" href="#signout">
                                         <Button className="rounded-pill" style={{ background: "crimson", border: "none", padding: "7px 25px" }} onClick={logOut}>Sign Out</Button>
                                     </Nav.Link>

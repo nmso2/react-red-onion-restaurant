@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Row } from 'react-bootstrap';
+import { Row, Button } from 'react-bootstrap';
 import { BrowserRouter, Link, Switch, Route } from 'react-router-dom';
+import { addToDb, getStoredCart } from '../../utilities/fakedb';
 import Food from '../Food/Food';
+import FoodDetails from '../FoodDetails/FoodDetails';
 import './Foods.css'
 
 const Foods = () => {
 
 
     const [foods, setFoods] = useState([]);
+    const [cart, setCart] = useState([]);
+
 
     useEffect(() => {
         fetch('https://nmso2.github.io/fake-data-json/data/foods.json')
@@ -15,10 +19,31 @@ const Foods = () => {
             .then(data => setFoods(data));
     }, []);
 
+    useEffect(() => {
+        if (foods.length) {
+            const savedCart = getStoredCart();
+            const storedCart = [];
+            for (const id in savedCart) {
+                const addedProduct = foods.find(food => food.id === id);
+                if (addedProduct) {
+                    const quantity = savedCart[id];
+                    addedProduct.quantity = quantity;
+                    storedCart.push(addedProduct);
+                }
+            }
+            setCart(storedCart);
+        }
+    }, [foods])
+
+
+    const handleAddToCart = (food) => {
+        setCart([...cart, food]);
+        addToDb(food.id);
+    }
+
     return (
         <div>
             <BrowserRouter>
-                <div>
                     <div className="d-flex justify-content-center">
                         <Link className="mx-2 text-decoration-none link-hover" to="/home/breakfast">Breakfast</Link>
                         <Link className="mx-2 text-decoration-none link-hover" to="/home/lunch">Lunch</Link>
@@ -58,8 +83,11 @@ const Foods = () => {
                                 }
                             </Row>
                         </Route>
+                        <Route path="/home/foods/:id">
+                                <FoodDetails foods={foods} handleAddToCart={handleAddToCart}></FoodDetails>
+                        </Route>
                     </Switch>
-                </div>
+                    <Button variant="warning">Checkout! Your Food</Button>
             </BrowserRouter>
         </div >
     );

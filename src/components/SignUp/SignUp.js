@@ -5,7 +5,7 @@ import useAuth from '../../hooks/useAuth';
 
 const SignUp = () => {
 
-    const { signInWithGoogle, setIsLoading } = useAuth();
+    const { signInWithGoogle, setIsLoading, handleNameChange, handaleEmailChange, handalePasswordChange, handaleConfirmPasswordChange, createNewUser, setUserName, setError, email, password, confirmPassword, error } = useAuth();
 
     const location = useLocation();
     const history = useHistory()
@@ -16,29 +16,57 @@ const SignUp = () => {
             .then((result) => {
                 history.push(redirect_uri);
             }).catch((error) => {
-
+                setError(error.message)
             }).finally(() => setIsLoading(false));
+    }
+
+
+    const handleRegistration = e => {
+        e.preventDefault();
+        if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
+            setError('Password must contain Minimum eight characters, at least one letter and one number');
+            return;
+        }
+        else if (password !== confirmPassword) {
+            setError("Password doesn't match!")
+        }
+        else {
+            createNewUser(email, password)
+                .then(userCredential => {
+                    const user = userCredential.user;
+                    setUserName();
+                    console.log(user);
+                    history.push('/login');
+                    setError('');
+                    alert('Your Accound have been created!')
+                }).catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    setError(errorCode, ":", errorMessage);
+                }).finally(() => { setIsLoading(false) });
+        }
     }
 
     return (
         <div style={{ width: '22rem' }} className="container-fluid">
+            <p className="text-danger">{error}</p>
             <Card className="mb-5 shadow-lg">
                 <Card.Body>
-                    <Form>
+                    <Form onSubmit={handleRegistration}>
                         <h3>Sign Up</h3>
                         <Form.Group className="mb-3" controlId="formBasicName">
-                            <Form.Control type="name" placeholder="Enter Name" />
+                            <Form.Control type="name" placeholder="Enter Name" required onBlur={handleNameChange} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Control type="email" placeholder="Enter Email" />
+                            <Form.Control type="email" placeholder="Enter Email" required onBlur={handaleEmailChange} />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Control type="password" placeholder="Password" />
+                            <Form.Control type="password" placeholder="Password" required onBlur={handalePasswordChange} />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
-                            <Form.Control type="password" placeholder="Confirm Password" />
+                            <Form.Control type="password" placeholder="Confirm Password" required onBlur={handaleConfirmPasswordChange} />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicCheckbox">

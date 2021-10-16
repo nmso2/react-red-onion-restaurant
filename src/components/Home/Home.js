@@ -23,8 +23,6 @@ const Home = ({ children }) => {
 
             <Foods></Foods>
 
-            <Button variant="warning">Checkout! Your Food</Button>
-
             <WhyYouChooseContainer></WhyYouChooseContainer>
 
         </div>

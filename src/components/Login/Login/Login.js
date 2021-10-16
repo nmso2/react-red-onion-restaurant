@@ -4,7 +4,9 @@ import { Link, useLocation, useHistory } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 
 const Login = () => {
-    const { signInWithGoogle, setIsLoading } = useAuth();
+    const { signInWithGoogle, setIsLoading, loginWithEmailPassword, handaleEmailChange, handalePasswordChange, email, password, setLoggedIn, setUser } = useAuth();
+
+    console.log();
 
     const location = useLocation();
     const history = useHistory()
@@ -14,6 +16,19 @@ const Login = () => {
         signInWithGoogle()
             .then((result) => {
                 history.push(redirect_uri);
+            }).catch((error) => {
+                console.log(error.message);
+
+            }).finally(() => setIsLoading(false));
+    }
+
+    const handleEmailLogin = e => {
+        e.preventDefault();
+        loginWithEmailPassword(email,password)
+            .then(result => {
+                history.push(redirect_uri);
+                setLoggedIn(true);
+                setUser(result);
             }).catch((error) => {
 
             }).finally(() => setIsLoading(false));
@@ -26,18 +41,18 @@ const Login = () => {
                     <Form>
                         <h3>Log In</h3>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Control type="email" placeholder="Enter email" />
+                            <Form.Control type="email" placeholder="Enter email" onBlur={handaleEmailChange}/>
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Control type="password" placeholder="Password" />
+                            <Form.Control type="password" placeholder="Password" onBlur={handalePasswordChange}/>
                         </Form.Group>
 
                         <Form.Group className="mb-3 text-start" controlId="formBasicCheckbox">
                             <Form.Check type="checkbox" label="Remember me" />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                            <Button type="submit" className="btn btn-primary btn-block" style={{ background: 'crimson', border: "none" }}>Log In</Button>
+                            <Button type="submit" className="btn btn-primary btn-block" style={{ background: 'crimson', border: "none" }} onClick={handleEmailLogin}>Log In</Button>
                         </Form.Group>
 
 
