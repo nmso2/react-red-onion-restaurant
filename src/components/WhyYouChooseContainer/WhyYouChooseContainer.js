@@ -21,7 +21,7 @@ const WhyYouChooseContainer = () => {
     return (
         <div className="mb-5">
 
-            <div className="text-start container px-5 pt-5 mx-auto row-cols-2">
+            <div className="text-start container px-lg-5 pt-5 mx-auto row-cols-lg-2">
             <h2>Why you choose us</h2>
             <p>Barton waited twenty always repair in within we de. An delighted offending curiosity my is dashwood at. Boy prosperous increasing surronded.</p>
             </div>
@@ -29,7 +29,7 @@ const WhyYouChooseContainer = () => {
             <Row xs={1} md={2} lg={3} className="g-5 px-5 mx-auto container">
                 <WhyYouChoose>
                     <Card.Img variant="top" src={img1} />
-                    <div className="d-flex px-3">
+                    <div className="d-flex px-lg-3">
                         <p className="py-2">{bus}</p>
                         <Card.Body className="text-start">
                             <Card.Title className="p-0 m-0">Fast Delivery</Card.Title>
@@ -43,7 +43,7 @@ const WhyYouChooseContainer = () => {
                 </WhyYouChoose>
                 <WhyYouChoose>
                     <Card.Img variant="top" src={img2} />
-                    <div className="d-flex px-3">
+                    <div className="d-flex px-lg-3">
                         <p className="py-2">{bell}</p>
                         <Card.Body className="text-start">
                             <Card.Title className="p-0 m-0">Fast Delivery</Card.Title>
@@ -56,7 +56,7 @@ const WhyYouChooseContainer = () => {
                 </WhyYouChoose>
                 <WhyYouChoose>
                     <Card.Img variant="top" src={img3} />
-                    <div className="d-flex px-3">
+                    <div className="d-flex px-lg-3">
                         <p className="py-2">{truck}</p>
                         <Card.Body className="text-start">
                             <Card.Title className="p-0 m-0">Fast Delivery</Card.Title>

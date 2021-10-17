@@ -64,6 +64,7 @@ const useFirebase = () => {
             }
             setIsLoading(false);
         });
+        // eslint-disable-next-line
     }, [])
 
     const logOut = () => {

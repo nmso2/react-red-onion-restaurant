@@ -8,6 +8,7 @@ import NotFound from './components/NotFound/NotFound';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import AuthProvider from './context/AuthProvider';
+import Cart from './components/Cart/Cart';
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
             </Route>
             <Route path="/signup">
               <SignUp></SignUp>
+            </Route>
+            <Route path="/cart">
+              <Cart></Cart>
             </Route>
             <Route path="*">
               <NotFound></NotFound>

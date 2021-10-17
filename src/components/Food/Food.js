@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Col } from 'react-bootstrap';
+import { Card, Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Food.css'
 
@@ -15,15 +15,12 @@ const Food = (props) => {
                             <Card.Title className="p-0 m-0">{name}</Card.Title>
                             <Card.Text>
                                 <p>{detail}</p>
-                                <p className="p-0 m-0 fs-4 text-danger">$ {price}</p>
+                                <p className="p-0 m-0 fs-4 text-danger">${price}</p>
                             </Card.Text>
                         </Card.Body>
                     </Card>
                 </Link>
-
             </Col>
-
-
         </div >
     );
 };

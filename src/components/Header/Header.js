@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import useAuth from '../../hooks/useAuth';
 import headerLogo from '../../resources/logo2.png'
 
@@ -20,7 +21,7 @@ const Header = () => {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="ms-auto align-items-center">
-                            <Nav.Link className="p-0 px-5" href="#cart"><Link className="text-decoration-none nav-link" to="/cart">{cartIcon}</Link></Nav.Link>
+                            <Nav.Link className="p-0 px-5" href="#login"><Link className="text-decoration-none nav-link" to="/cart">{cartIcon}</Link></Nav.Link>
 
                             {
                                 !loggedIn ? <Nav.Link className="p-0" href="#login"><Link className="text-decoration-none nav-link" to="/login">Login</Link></Nav.Link> : user.displayName
